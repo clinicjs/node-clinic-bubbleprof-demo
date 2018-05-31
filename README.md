@@ -24,10 +24,22 @@ There are 3 iterations of a server that returns the 5 latest and 5 oldest update
 1. Returns the latest and oldest 5 modules from an *indexed* collection
 1. Returns the same as `/b` but does the queries in parallel.
 
-Each should produce different bubbleprof results indicating the async profile of each. Running `1` you should see a ton of latency, running `2` you should see much more throughput, and running `3` you should a bit more branches in the async graph.
+Each should produce different bubbleprof results indicating the async profile of each:
 
-To run the first one do:
+Running `1` you should see a ton of latency:
 
 ```sh
-clinic bubbleprof --on-port 'autocannon localhost:$PORT/' -- node example/1-server-no-index.js
+clinic bubbleprof --on-port 'autocannon localhost:$PORT/' -- node 1-server-with-no-index.js
+```
+
+Running `2` you should see much more throughput:
+
+```sh
+clinic bubbleprof --on-port 'autocannon localhost:$PORT/' -- node 2-server-with-index.js
+```
+
+Running `3` you should see some more branches in the async graph:
+
+```sh
+clinic bubbleprof --on-port 'autocannon localhost:$PORT/' -- node 3-server-with-index-in-parallel.js
 ```

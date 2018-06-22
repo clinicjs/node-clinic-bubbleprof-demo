@@ -5,11 +5,11 @@ const each = require('stream-each')
 const ndjson = require('ndjson')
 
 // make sure to have mongodb running
-const db = mongojs('localhost:27017/npm', ['fast', 'slow'])
+const db = mongojs('localhost:27017/npm', ['modulesIndexed', 'modules'])
 
-db.fast.ensureIndex({modified: 1})
+db.modulesIndexed.ensureIndex({modified: 1})
 
-db.fast.find({}).sort({seq: -1}).limit(1, function (err, docs) {
+db.modulesIndexed.find({}).sort({seq: -1}).limit(1, function (err, docs) {
   if (err) throw err
   sync(docs.length ? docs[0].seq + 1 : 0, function (err) {
     if (err) throw err
@@ -34,9 +34,8 @@ function sync (since, cb) {
         modified: data.doc.time.modified
       }
 
-      console.log('saving', doc)
-      db.fast.save(doc, function (err) {
-        db.slow.save(doc, cb)
+      db.modulesIndexed.save(doc, function (err) {
+        db.modules.save(doc, cb)
       })
     }
   })

@@ -18,11 +18,12 @@ Then to import some data
 node import-npm.js
 ```
 
-There are 3 iterations of a server that returns the 5 latest and 5 oldest updated modules on npm.
+There are 4 iterations of a server that returns the 5 latest and 5 oldest updated modules on npm.
 
 1. Returns the latest and oldest 5 modules from an *unindexed* collection
 1. Returns the latest and oldest 5 modules from an *indexed* collection
-1. Returns the same as `/b` but does the queries in parallel.
+1. Returns the same as `2` but does the queries in parallel.
+1. Caches the result from `3` in 5s in an LRU cache.
 
 Each should produce different bubbleprof results indicating the async profile of each. Running `1` you should see a ton of latency, running `2` you should see much more throughput, and running `3` you should a bit more branches in the async graph.
 

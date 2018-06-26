@@ -8,7 +8,10 @@ If you have docker installed you can install and run a mongo container by doing.
 
 ```sh
 docker pull mongo
+# Linux
 docker run -it -p 27017:27017 mongo
+# OSX & Windows
+docker run -v $(pwd)/datadir:/data/db -p 27017:27017 -d mongo
 ```
 
 Then to import some data

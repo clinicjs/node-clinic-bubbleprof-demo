@@ -33,5 +33,5 @@ Each should produce different bubbleprof results indicating the async profile of
 To run the first one do:
 
 ```sh
-clinic bubbleprof --on-port 'autocannon localhost:$PORT -c 2' -- node 1-server-with-no-index.js
+clinic bubbleprof --on-port 'autocannon localhost:$PORT -c 5 -a 500' -- node 1-server-with-no-index.js
 ```

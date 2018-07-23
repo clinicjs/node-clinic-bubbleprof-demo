@@ -16,7 +16,7 @@ docker run -it -p 27017:27017 mongo
 
 ## Alternative
 
-Some platforms may give a Docker error and reqire the following command instead
+Some platforms may give a Docker error and require the following command instead
 
 ```sh
 docker pull mongo
@@ -41,9 +41,9 @@ There are 4 iterations of a server that returns the 5 latest and 5 oldest update
 1.  Returns the same as `2` but does the queries in parallel.
 1.  Caches the result from `3` in 5s in an LRU cache.
 
-Each should produce different bubbleprof results indicating the async profile of each. Running `1` you should see a ton of latency, running `2` you should see much more throughput, and running `3` you should see a few more branches in the async graph.
+Each should produce different Bubbleprof results indicating the async profile of each. Running `1` you should see a ton of latency, running `2` you should see much more throughput, and running `3` you should see a few more branches in the async graph.
 
-## Run BubbleProf
+## Run Bubbleprof
 
 To run the first one do:
 
